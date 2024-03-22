@@ -1,7 +1,8 @@
 import 'boxicons'
+import { Link } from 'react-router-dom';
 const Job = ({ job }) => {
 
-    const {logo, job_title, company_name, remote_or_onsite, job_type, location, salary} = job;
+    const { id, logo, job_title, company_name, remote_or_onsite, job_type, location, salary } = job;
 
     return (
         <div className='m-auto mb-[235px]'>
@@ -19,7 +20,9 @@ const Job = ({ job }) => {
                         <p className='flex text-center'><box-icon name='money-withdraw'></box-icon>{salary}</p>
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn bg-indigo-500 text-white hover:bg-transparent hover:border-indigo-500 hover:text-indigo-500">View Details</button>
+                        <Link to={`/job/${id}`}>
+                            <button className="btn bg-indigo-500 text-white hover:bg-transparent hover:border-indigo-500 hover:text-indigo-500">View Details</button>
+                        </Link>
                     </div>
                 </div>
             </div>
