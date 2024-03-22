@@ -9,15 +9,15 @@ const AppliedJobs = () => {
     const [appliedJobs, setAppliedJobs] = useState([]);
     const [displayJobs, setDisplayJobs] = useState([]);
 
-    const handleJobsFilter = filter =>{
-        if(filter === 'all'){
+    const handleJobsFilter = filter => {
+        if (filter === 'all') {
             setDisplayJobs(appliedJobs);
         }
-        else if (filter === 'remote'){
+        else if (filter === 'remote') {
             const remoteJobs = appliedJobs.filter(job => job.remote_or_onsite === 'Remote');
             setDisplayJobs(remoteJobs);
         }
-        else if (filter === 'onsite'){
+        else if (filter === 'onsite') {
             const onsiteJobs = appliedJobs.filter(job => job.remote_or_onsite === 'Onsite');
             setDisplayJobs(onsiteJobs);
         }
@@ -54,11 +54,25 @@ const AppliedJobs = () => {
                     <li onClick={() => handleJobsFilter('onsite')}><a>Onsite</a></li>
                 </ul>
             </details>
-            <ul>
+            <ul className="flex flex-col m-auto gap-6">
                 {
                     displayJobs.map(job =>
                         <li key={job.id}>
-                            <span>{job.job_title} {job.company_name} {job.remote_or_onsite}</span>
+                            <div className="card w-96 bg-base-100 shadow-xl">
+                                <figure><img src={job.logo} alt={job.job_title} /></figure>
+                                <div className="card-body">
+                                    <h3 className="font-semibold">{job.job_title}</h3>
+                                    <p>{job.company_name}</p>
+                                    <div className="flex gap-4">
+                                        <div className="border-2 border-indigo-300 w-[100px] h-[30px] text-center"><p className="text-indigo-500">{job.remote_or_onsite}</p></div>
+                                        <div className="border-2 border-indigo-300 w-[100px] h-[30px] text-center"><p className="text-indigo-500">{job.job_type}</p></div>
+                                    </div>
+                                    <div className='flex gap-6'>
+                                        <p className='flex text-center'><box-icon name='location-plus'></box-icon>{job.location}</p>
+                                        <p className='flex text-center'><box-icon name='money-withdraw'></box-icon>{job.salary}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     )
                 }
